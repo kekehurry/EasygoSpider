@@ -7,8 +7,6 @@ import time
 def control():
     server=imapclient.IMAPClient('imap.qq.com',ssl = True)
     server.login(settings.mail_user,settings.mail_pass)
-
-
     server.select_folder('INBOX',readonly = True)
     UIDS=server.search(['FROM %s'%settings.mail_user,'UNSEEN'])
     mail = server.fetch(UIDS,['BODY[]'])
@@ -34,5 +32,8 @@ def update_github():
 
 if __name__ == '__main__':
     while True:
-        control()
-        time.sleep(60)
+        try:
+            control()
+            time.sleep(60)
+        except Exception as e:
+            pass
