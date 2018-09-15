@@ -18,6 +18,7 @@ import qqlist
 import settings
 import transCoordinateSystem
 import mail
+import remote_control
 
 class CookieException(Exception):
     def __init__(self):
@@ -205,7 +206,9 @@ class easygospider():
             write_log("此轮抓取完成，开始去重")
             self.remove_duplicate(self.filepath + self.filename + time_now_str + ".txt")
             write_log("去重完成,等待下一轮开始")
-            mail.send_mail("去重完成,等待下一轮开始")
+            remote_control.update_github()
+            write_log("文件已上传")
+            mail.send_mail("去重完成,文件已上传,等待下一轮开始")
             time.sleep(settings.sleeptime - int(time.time() - time_now))
 
 def write_log(content):
@@ -226,6 +229,9 @@ if __name__ == "__main__":
         app.exec()
     except Exception as e:
         write_log("任务出错，等待下一轮开始")
-        mail.send_mail("任务出错，等待下一轮开始")
+        try:
+            mail.send_mail("任务出错，等待下一轮开始")
+        except Exception as e:
+            pass
         time.sleep(settings.sleeptime)
         app.exec()

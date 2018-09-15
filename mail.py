@@ -2,7 +2,6 @@
 # -*- coding: UTF-8 -*-
 
 import smtplib
-import poplib
 import settings
 from email.mime.text import MIMEText
 from email.header import Header
@@ -31,30 +30,3 @@ def send_mail(content):
         smtpObj.sendmail(sender, receivers, message.as_string())
     except Exception as e:
         pass
-
-
-def receive_mail():
-    email = settings.mail_user
-    password =settings.mail_user
-    pop3_server = "pop.qq.com"
-
-    server = poplib.POP3(pop3_server,995)
-    print(server.getwelcome())
-    server.user(email)
-    server.pass_(password)
-# list()返回所有邮件的编号:
-    resp, mails, octets = server.list()
-    print(mails)
-# 获取最新一封邮件, 注意索引号从1开始:
-    index = len(mails)
-    resp, lines, octets = server.retr(index)
-# lines存储了邮件的原始文本的每一行,
-# 可以获得整个邮件的原始文本:
-    msg_content = '\r\n'.join(lines)
-# 稍后解析出邮件:
-    print(msg_content)
-
-    server.quit()
-
-if __name__ == '__main__':
-    receive_mail()
