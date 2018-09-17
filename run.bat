@@ -1,4 +1,4 @@
 F:
-cd F:\Desktop\easygo
+cd F:\Desktop\EasygoSpider-master\EasygoSpider
 python ./main.py 
 pause
