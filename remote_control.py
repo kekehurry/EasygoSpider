@@ -1,19 +1,25 @@
 import imapclient
+import mail
 import settings
 from email.parser import Parser
 import os
+import threading
 import time
 
-def control():
+def readmail():
     server=imapclient.IMAPClient('imap.qq.com',ssl = True)
     server.login(settings.mail_user,settings.mail_pass)
-    server.select_folder('INBOX',readonly = True)
+    server.select_folder('INBOX',readonly = False)
     UIDS=server.search(['FROM %s'%settings.mail_user,'UNSEEN'])
-    mail = server.fetch(UIDS,['BODY[]'])
-    msg = Parser().parsestr(mail[UIDS[0]][b'BODY[]'].decode('utf-8'))
-    subject = msg.get('Subject')
-    print(subject)
+    content = server.fetch(UIDS,['BODY[]'])
+    try:
+        msg = Parser().parsestr(content[UIDS[0]][b'BODY[]'].decode('utf-8'))
+        subject = msg.get('Subject')
+    except Exception as e:
+        subject=""
+    return subject
 
+def control(subject):
     if subject=='Start':
         os.chdir("F:\\Desktop\\EasygoSpider-master\\EasygoSpider")
         os.system("taskkill /f /t /im powershell.exe")
@@ -23,6 +29,7 @@ def control():
         os.chdir("F:\\Desktop\\EasygoSpider-master\\EasygoSpider")
         os.system("taskkill /f /t /im powershell.exe")
         os.system("taskkill /f /t /im cmd.exe")
+        mail.send_mail("%s Done!"%subject)
 
 def update_github():
     os.chdir("F:\\Desktop\\EasygoSpider-master\\EasygoSpider")
@@ -33,7 +40,14 @@ def update_github():
 if __name__ == '__main__':
     while True:
         try:
-            control()
+            subject=readmail()
+            if subject != "":
+                print(subject)
+                t=threading.Thread(target=control,args=(subject,),name='Control')
+                t.start()
+            else:
+                print("waiting for instruction")
             time.sleep(60)
         except Exception as e:
             pass
+ 
