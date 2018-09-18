@@ -1,6 +1,6 @@
 import imapclient
 import mail
-import settings
+import qqlist
 from email.parser import Parser
 import os
 import threading
@@ -8,7 +8,7 @@ import time
 
 def readmail():
     server=imapclient.IMAPClient('imap.qq.com',ssl = True)
-    server.login(settings.mail_user,settings.mail_pass)
+    server.login(qqlist.mail_user,qqlist.mail_pass)
     server.select_folder('INBOX',readonly = False)
     UIDS=server.search(['FROM %s'%settings.mail_user,'UNSEEN'])
     content = server.fetch(UIDS,['BODY[]'])
@@ -21,18 +21,18 @@ def readmail():
 
 def control(subject):
     if subject=='Start':
-        os.chdir("F:\\Desktop\\EasygoSpider-master\\EasygoSpider")
+        os.chdir("C:\\Users\\Kaius\\Desktop\\EasygoSpider")
         os.system("taskkill /f /t /im powershell.exe")
         os.system("taskkill /f /t /im cmd.exe")
         os.system(".\\run.bat")
     if subject=='Stop':
-        os.chdir("F:\\Desktop\\EasygoSpider-master\\EasygoSpider")
+        os.chdir("C:\\Users\\Kaius\\Desktop\\EasygoSpider")
         os.system("taskkill /f /t /im powershell.exe")
         os.system("taskkill /f /t /im cmd.exe")
         mail.send_mail("%s Done!"%subject)
 
 def update_github():
-    os.chdir("F:\\Desktop\\EasygoSpider-master\\EasygoSpider")
+    os.chdir("C:\\Users\\Kaius\\Desktop\\EasygoSpider")
     os.system("git add .")
     os.system("git commit -m \'refresh\'")
     os.system("git push")

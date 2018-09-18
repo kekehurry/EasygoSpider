@@ -2,23 +2,23 @@
 # -*- coding: UTF-8 -*-
 
 import smtplib
-import settings
+import qqlist
 from email.mime.text import MIMEText
 from email.header import Header
 
 
 def send_mail(content):
-    mail_host=settings.mail_host  #设置服务器
-    mail_user=settings.mail_user    #用户名
-    mail_pass=settings.mail_pass   #口令
+    mail_host=qqlist.mail_host  #设置服务器
+    mail_user=qqlist.mail_user    #用户名
+    mail_pass=qqlist.mail_pass   #口令
 
 
-    sender = settings.mail_user
-    receivers = [settings.mail_user ]  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+    sender = qqlist.mail_user
+    receivers = [qqlist.mail_user ]  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 
     message = MIMEText(content, 'plain', 'utf-8')
     message['From'] = Header("easygospider", 'utf-8')
-    message['To'] =  Header(settings.mail_user, 'utf-8')
+    message['To'] =  Header(qqlist.mail_user, 'utf-8')
 
     subject = 'easygospider'
     message['Subject'] = Header(subject, 'utf-8')
