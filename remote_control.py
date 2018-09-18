@@ -10,7 +10,7 @@ def readmail():
     server=imapclient.IMAPClient('imap.qq.com',ssl = True)
     server.login(qqlist.mail_user,qqlist.mail_pass)
     server.select_folder('INBOX',readonly = False)
-    UIDS=server.search(['FROM %s'%settings.mail_user,'UNSEEN'])
+    UIDS=server.search(['FROM %s'%qqlist.mail_user,'UNSEEN'])
     content = server.fetch(UIDS,['BODY[]'])
     try:
         msg = Parser().parsestr(content[UIDS[0]][b'BODY[]'].decode('utf-8'))
@@ -49,5 +49,6 @@ if __name__ == '__main__':
                 print("waiting for instruction")
             time.sleep(60)
         except Exception as e:
+            print(e)
             pass
  
