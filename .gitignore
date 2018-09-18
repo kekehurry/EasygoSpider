@@ -2,3 +2,5 @@
 *.log
 
 settings.py
+
+qqlist.py
