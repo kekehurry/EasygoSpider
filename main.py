@@ -203,7 +203,7 @@ class easygospider():
                     except Exception as e:
                         write_log("出错了!%s"%e)
                         mail.send_mail("出错了！%s"%e)
-                        continue 
+                        pass
             try:
                 view_bar(i, len(params_list))
                 i += 1
