@@ -17,10 +17,10 @@ def send_mail(content):
     receivers = [qqlist.mail_user ]  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 
     message = MIMEText(content, 'plain', 'utf-8')
-    message['From'] = Header("菜鸟教程", 'utf-8')
-    message['To'] =  Header("测试", 'utf-8')
-    subject = 'Python SMTP 邮件测试'
-    message['Subject'] = Header(subject, 'utf-8')
+    message['From'] = Header('easygospider <837082742@qq.com>', 'utf-8')
+    message['To'] = Header('ganzige <837082742@qq.com>', 'utf-8')
+    message['Subject'] = Header('Feedback', 'utf-8')
+    print(message)
 
     try:
         smtpObj = smtplib.SMTP()

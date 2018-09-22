@@ -43,14 +43,14 @@ if __name__ == '__main__':
     while True:
         try:
             subject=readmail()
-            if subject != "":
-                print(subject)
+            if subject =="Start" or subject=="Stop":
+                print('%s %s'%(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())),subject))
                 t=threading.Thread(target=control,args=(subject,),name='Control')
                 t.start()
             else:
                 if x % 60==0:
                     x=0
-                    print("waiting for instructions")
+                    print("%s waiting for instructions"%time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())))
                 x+=1
             time.sleep(10)
         except Exception as e:

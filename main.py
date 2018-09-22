@@ -201,15 +201,20 @@ class easygospider():
                     except CookieException as e:
                         cookie = self.get_cookie()
                     except Exception as e:
-                        continue
+                        write_log("出错了!%s"%e)
+                        mail.send_mail("出错了！%s"%e)
+                        continue 
+            try:
                 view_bar(i, len(params_list))
                 i += 1
-            write_log("此轮抓取完成，开始去重")
-            self.remove_duplicate(self.filepath + self.filename + time_now_str + ".txt")
-            write_log("去重完成,等待下一轮开始")
-            remote_control.update_github()
-            write_log("文件已上传")
-            mail.send_mail("去重完成,文件已上传,等待下一轮开始")
+                write_log("此轮抓取完成，开始去重")
+                self.remove_duplicate(self.filepath + self.filename + time_now_str + ".txt")
+                write_log("去重完成,等待下一轮开始")
+                remote_control.update_github()
+                write_log("文件已上传")
+                mail.send_mail("去重完成,文件已上传,等待下一轮开始")
+            except Exception as e:
+                continue
             time.sleep(settings.sleeptime - int(time.time() - time_now))
 
 def write_log(content):
