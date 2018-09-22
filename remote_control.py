@@ -38,6 +38,7 @@ def update_github():
     os.system("git push")
 
 if __name__ == '__main__':
+    x=0
     while True:
         try:
             subject=readmail()
@@ -46,8 +47,11 @@ if __name__ == '__main__':
                 t=threading.Thread(target=control,args=(subject,),name='Control')
                 t.start()
             else:
-                print("waiting for instruction")
-            time.sleep(60)
+                if x % 60==0:
+                    x=0
+                    print("waiting for instructions")
+                x+=1
+            time.sleep(10)
         except Exception as e:
             print(e)
             pass

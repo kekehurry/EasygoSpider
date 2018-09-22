@@ -200,7 +200,8 @@ class easygospider():
                         break
                     except CookieException as e:
                         cookie = self.get_cookie()
-
+                    except Exception as e:
+                        continue
                 view_bar(i, len(params_list))
                 i += 1
             write_log("此轮抓取完成，开始去重")
@@ -225,13 +226,5 @@ def view_bar(num, total):
 
 if __name__ == "__main__":
     app = easygospider()
-    try:
-        app.exec()
-    except Exception as e:
-        write_log("任务出错，等待下一轮开始")
-        try:
-            mail.send_mail("任务出错，等待下一轮开始")
-        except Exception as e:
-            pass
-        time.sleep(settings.sleeptime)
-        app.exec()
+    app.exec()
+
