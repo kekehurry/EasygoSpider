@@ -17,10 +17,9 @@ def send_mail(content):
     receivers = [qqlist.mail_user ]  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 
     message = MIMEText(content, 'plain', 'utf-8')
-    message['From'] = Header("easygospider", 'utf-8')
-    message['To'] =  Header(qqlist.mail_user, 'utf-8')
-
-    subject = 'easygospider'
+    message['From'] = Header("菜鸟教程", 'utf-8')
+    message['To'] =  Header("测试", 'utf-8')
+    subject = 'Python SMTP 邮件测试'
     message['Subject'] = Header(subject, 'utf-8')
 
     try:
@@ -30,3 +29,6 @@ def send_mail(content):
         smtpObj.sendmail(sender, receivers, message.as_string())
     except Exception as e:
         pass
+
+if __name__ == '__main__':
+    send_mail('test')

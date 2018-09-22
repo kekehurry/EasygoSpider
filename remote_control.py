@@ -12,6 +12,7 @@ def readmail():
     server.select_folder('INBOX',readonly = False)
     UIDS=server.search(['FROM %s'%qqlist.mail_user,'UNSEEN'])
     content = server.fetch(UIDS,['BODY[]'])
+    flags=server.set_flags(UIDS,'\SEEN')
     try:
         msg = Parser().parsestr(content[UIDS[0]][b'BODY[]'].decode('utf-8'))
         subject = msg.get('Subject')
