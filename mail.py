@@ -20,8 +20,6 @@ def send_mail(content):
     message['From'] = Header('easygospider <837082742@qq.com>', 'utf-8')
     message['To'] = Header('ganzige <837082742@qq.com>', 'utf-8')
     message['Subject'] = Header('Feedback', 'utf-8')
-    print(message)
-
     try:
         smtpObj = smtplib.SMTP()
         smtpObj.connect(mail_host, 25)    # 25 为 SMTP 端口号
