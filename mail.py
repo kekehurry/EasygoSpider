@@ -7,7 +7,7 @@ from email.mime.text import MIMEText
 from email.header import Header
 
 
-def send_mail(content):
+def send_mail(content,subject='Feedback'):
     mail_host=qqlist.mail_host  #设置服务器
     mail_user=qqlist.mail_user    #用户名
     mail_pass=qqlist.mail_pass   #口令
@@ -19,7 +19,7 @@ def send_mail(content):
     message = MIMEText(content, 'plain', 'utf-8')
     message['From'] = Header('easygospider <837082742@qq.com>', 'utf-8')
     message['To'] = Header('ganzige <837082742@qq.com>', 'utf-8')
-    message['Subject'] = Header('Feedback', 'utf-8')
+    message['Subject'] = Header(subject, 'utf-8')
     try:
         smtpObj = smtplib.SMTP()
         smtpObj.connect(mail_host, 25)    # 25 为 SMTP 端口号

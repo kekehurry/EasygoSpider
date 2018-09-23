@@ -201,7 +201,7 @@ class easygospider():
                     except CookieException as e:
                         cookie = self.get_cookie()
                     except Exception as e:
-                        mail.send_mail("Start")
+                        mail.send_mail("出错了，重新启动中","Start")
                         time.sleep(300)
                         pass
             try:
