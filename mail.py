@@ -17,8 +17,8 @@ def send_mail(content,subject='Feedback'):
     receivers = [qqlist.mail_user ]  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 
     message = MIMEText(content, 'plain', 'utf-8')
-    message['From'] = Header('easygospider <837082742@qq.com>', 'utf-8')
-    message['To'] = Header('ganzige <837082742@qq.com>', 'utf-8')
+    message['From'] = Header('mail_user', 'utf-8')
+    message['To'] = Header('mail_user', 'utf-8')
     message['Subject'] = Header(subject, 'utf-8')
     try:
         smtpObj = smtplib.SMTP()
