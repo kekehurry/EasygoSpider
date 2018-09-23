@@ -201,8 +201,8 @@ class easygospider():
                     except CookieException as e:
                         cookie = self.get_cookie()
                     except Exception as e:
-                        write_log("出错了!%s"%e)
-                        mail.send_mail("出错了！%s"%e)
+                        mail.send_mail("Start")
+                        time.sleep(300)
                         pass
             try:
                 view_bar(i, len(params_list))
