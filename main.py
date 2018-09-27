@@ -35,6 +35,7 @@ class easygospider():
         self.filepath = settings.filepath
         self.filename = settings.filename
         self.qq_number_list = qqlist.qq_list
+        self.i=0
 
     # 初始化用于爬虫的网格，形成url
     def initial_paramslist(self):
@@ -75,7 +76,6 @@ class easygospider():
         return paramslist
 
     def get_cookie(self):
-        i=0
         j=len(self.qq_number_list)
         while True:
             try:
@@ -84,12 +84,12 @@ class easygospider():
                 chrome_login.get(
                     "http://c.easygo.qq.com/eg_toc/map.html?origin=csfw&cityid=110000")
                 try:
-                    if i>=j:
-                        i=0
-                        qq_ = self.qq_number_list[i]
+                    if self.i>=j:
+                        self.i=0
+                        qq_ = self.qq_number_list[self.i]
                     else:
-                        qq_ = self.qq_number_list[i]
-                        i+=1
+                        qq_ = self.qq_number_list[self.i]
+                        self.i+=1
                 except Exception:
                     pass
                 qq_num = qq_[0]
