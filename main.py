@@ -81,17 +81,13 @@ class easygospider():
             try:
                 chrome_login = webdriver.Chrome(executable_path="chromedriver.exe")
                 chrome_login.implicitly_wait(10)
-                chrome_login.get(
-                    "http://c.easygo.qq.com/eg_toc/map.html?origin=csfw&cityid=110000")
-                try:
-                    if self.i>=j:
-                        self.i=0
-                        qq_ = self.qq_number_list[self.i]
-                    else:
-                        qq_ = self.qq_number_list[self.i]
-                        self.i+=1
-                except Exception:
-                    pass
+                chrome_login.get("http://c.easygo.qq.com/eg_toc/map.html?origin=csfw&cityid=110000")
+                if self.i>=j:
+                    self.i=0
+                    qq_ = self.qq_number_list[self.i]
+                else:
+                    qq_ = self.qq_number_list[self.i]
+                    self.i+=1
                 qq_num = qq_[0]
                 qq_passwd = qq_[1]
                 chrome_login.find_element_by_id("u").send_keys(qq_num)
@@ -108,11 +104,6 @@ class easygospider():
                 if "温馨提示" in chrome_login.page_source:
                     chrome_login.close()
                     continue
-
-                if "联系客服" in chrome_login.page_source:
-                    chrome_login.close()
-                    continue
-
                 #获取cookie
                 cookies = chrome_login.get_cookies()
                 chrome_login.quit()
