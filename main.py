@@ -189,9 +189,8 @@ class easygospider():
                         text = self.spyder(cookie, params)
                         self.save(text, time_now_str, file_name=self.filepath + self.filename + time_now_str + ".txt")
                         break
-                    except CookieException as e:
-                        cookie = self.get_cookie()
                     except Exception as e:
+                        print(e)
                         cookie = self.get_cookie()
             view_bar(i, len(params_list))
             i += 1
