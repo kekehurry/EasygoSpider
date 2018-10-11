@@ -22,18 +22,18 @@ def readmail():
 
 def control(subject):
     if subject=='Start':
-        os.chdir("C:\\Users\\Kaius\\Desktop\\EasygoSpider")
+        os.chdir("D:\\Desktop\\EasygoSpider")
         os.system("taskkill /f /t /im powershell.exe")
         os.system("taskkill /f /t /im cmd.exe")
         os.system(".\\run.bat")
     if subject=='Stop':
-        os.chdir("C:\\Users\\Kaius\\Desktop\\EasygoSpider")
+        os.chdir("D:\\Desktop\\EasygoSpider")
         os.system("taskkill /f /t /im powershell.exe")
         os.system("taskkill /f /t /im cmd.exe")
         mail.send_mail("%s Done!"%subject)
 
 def update_github():
-    os.chdir("C:\\Users\\Kaius\\Desktop\\EasygoSpider")
+    os.chdir("D:\\Desktop\\EasygoSpider")
     os.system("git add .")
     os.system("git commit -m \'refresh\'")
     os.system("git push")
